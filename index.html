@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr class="cinema__item">
+            <td>Cinema Name 1</td>
+            <td>25$</td>
+        </tr>
+        <tr class="cinema__item">
+            <td></td>
+            <td>35$</td>
+        </tr>
+        <tr class="cinema__item">
+            <td>Cinema Name 3</td>
+            <td>75$</td>
+        </tr>
+        <tr class="cinema__item">
+            <td>Cinema Name 4</td>
+            <td></td>
+        </tr>
+        <tr class="cinema__item">
+            <td>Cinema Name 5</td>
+            <td>75$</td>
+        </tr>
+    </table>
+    <script>
+        // Сформировать массив объектов, в котором объектом будет Фильм с полем name и price.
+        //     Вывести в консоль массив с названием фильмов, которые имеют название и цену.
+        //     Отобразить итоговую стоимость заказа для выше отфильтрованных фильмов.
+
+        class Film {
+            constructor(name,price) {
+                this.name = name;
+                this.price = price;
+            }
+        }
+
+         let films = document.querySelectorAll('tr'),
+             filmArray = [];
+
+        for(film of films){
+            let filmObj = new Film(film.firstElementChild.innerText, film.lastElementChild.innerText);
+            filmArray.push(filmObj);
+        }
+        console.log(filmArray);
+        let filterResults = filmArray.filter(film => film.name !== '' && film.price !== '');
+        console.log(filterResults);
+
+        for (i=0, overallSumm=0; i<filterResults.length;i++){
+            for (key in filterResults[i]){
+                if ( key === 'price'){
+                    overallSumm+=parseInt(filterResults[i][key]);
+                }
+            }
+        }
+
+        console.log('Overall summ of this films is   '+overallSumm);
+
+    </script>
+</body>
+</html>
